@@ -1,12 +1,9 @@
 package it.unisalento.melanomaDetector.domain;
 
-import javax.persistence.Basic;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -16,9 +13,7 @@ public class Readings {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int id;
 
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	byte[] image;
+	String image;
 
 	String highestPredictionClass;
 
@@ -29,7 +24,7 @@ public class Readings {
 	@ManyToOne(optional = false)
 	User user;
 
-	public Readings(int id, byte[] image, String highestPredictionClass, float highestPredictionScore, int risk,
+	public Readings(int id, String image, String highestPredictionClass, float highestPredictionScore, int risk,
 			User user) {
 		super();
 		this.id = id;
@@ -52,11 +47,11 @@ public class Readings {
 		this.id = id;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

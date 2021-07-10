@@ -39,7 +39,6 @@ public class UserRestController {
 		toSave.setAge(user.getAge());
 		toSave.setCodiceFiscale(user.getCodiceFiscale());
 		toSave.setEmail(user.getEmail());
-		toSave.setId(user.getId());
 		toSave.setName(user.getName());
 		toSave.setPassword(user.getPassword());
 		toSave.setSurname(user.getSurname());

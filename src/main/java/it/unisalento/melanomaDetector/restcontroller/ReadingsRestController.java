@@ -19,6 +19,7 @@ import it.unisalento.melanomaDetector.dto.ReadingsDTO;
 import it.unisalento.melanomaDetector.dto.UserDTO;
 import it.unisalento.melanomaDetector.exceptions.ReadingNotSavedException;
 import it.unisalento.melanomaDetector.iservice.IReadingsService;
+import it.unisalento.melanomaDetector.iservice.IUserService;
 
 @RestController
 @RequestMapping("/readings")
@@ -27,6 +28,8 @@ public class ReadingsRestController {
 
 	@Autowired
 	IReadingsService readingsService;
+	@Autowired
+	IUserService userService;
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ReadingsDTO> getAll(@PathVariable int id) {
@@ -48,9 +51,9 @@ public class ReadingsRestController {
 		Readings toSave = new Readings();
 		toSave.setHighestPredictionClass(reading.getHighestPredictionClass());
 		toSave.setHighestPredictionScore(reading.getHighestPredictionScore());
-		toSave.setId(reading.getId());
 		toSave.setImage(reading.getImage());
 		toSave.setRisk(reading.getRisk());
+		toSave.setUser(userService.getById(reading.getUser().getId()));
 		Readings saved = readingsService.save(toSave);
 
 		if (saved == null)

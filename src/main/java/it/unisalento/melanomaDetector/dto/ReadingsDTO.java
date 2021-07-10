@@ -1,15 +1,13 @@
 package it.unisalento.melanomaDetector.dto;
 
-import javax.persistence.Lob;
 import javax.validation.constraints.NotEmpty;
 
 public class ReadingsDTO {
 
-	@NotEmpty
 	int id;
 
-	@Lob
-	byte[] image;
+	@NotEmpty
+	String image;
 
 	@NotEmpty
 	String highestPredictionClass;
@@ -31,11 +29,11 @@ public class ReadingsDTO {
 		this.id = id;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

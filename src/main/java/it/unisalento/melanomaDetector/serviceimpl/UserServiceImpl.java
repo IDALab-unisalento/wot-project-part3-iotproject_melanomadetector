@@ -23,4 +23,9 @@ public class UserServiceImpl implements IUserService {
 		return this.userRepo.save(user);
 	}
 
+	@Override
+	public User getById(int id) {
+		return this.userRepo.findById(id).get();
+	}
+
 }
