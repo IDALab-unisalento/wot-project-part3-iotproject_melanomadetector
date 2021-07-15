@@ -22,7 +22,10 @@ public class User {
 	@Column(unique = true)
 	String email;
 	String password;
+	@Column(unique = true)
 	String codiceFiscale;
+
+	String type;
 
 	@OneToMany(mappedBy = "user", targetEntity = Readings.class)
 	List<Readings> readings;
@@ -44,6 +47,14 @@ public class User {
 
 	public int getId() {
 		return id;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public void setId(int id) {

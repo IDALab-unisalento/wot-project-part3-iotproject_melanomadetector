@@ -17,7 +17,7 @@ import it.unisalento.melanomaDetector.iservice.IUserService;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8100", "http://192.168.1.4:8100/" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserRestController {
 
 	@Autowired
@@ -25,16 +25,16 @@ public class UserRestController {
 
 	@PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public UserDTO loginUser(@RequestBody Login login) throws UserNotFoundException {
-		User user = userService.getByEmailAndPassword(login.getEmail(), login.getPassword());
+		User user = userService.getByEmailAndPasswordAndType(login.getEmail(), login.getPassword(), login.getType());
 
 		if (user == null)
-			throw new UserNotFoundException();
+			return null;
 
 		return this.fillDTO(user);
 	}
 
 	@PostMapping(value = "/signup", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public User loginUser(@RequestBody UserDTO user) throws UserNotSavedException {
+	public User signup(@RequestBody UserDTO user) throws UserNotSavedException {
 		User toSave = new User();
 		toSave.setAge(user.getAge());
 		toSave.setCodiceFiscale(user.getCodiceFiscale());
@@ -42,6 +42,7 @@ public class UserRestController {
 		toSave.setName(user.getName());
 		toSave.setPassword(user.getPassword());
 		toSave.setSurname(user.getSurname());
+		toSave.setType(user.getType());
 		User saved = userService.save(toSave);
 
 		if (saved == null)
@@ -57,8 +58,9 @@ public class UserRestController {
 		u.setEmail(user.getEmail());
 		u.setId(user.getId());
 		u.setName(user.getName());
+		u.setType(user.getType());
 		u.setPassword(user.getPassword());
-		u.setSurname(user.getPassword());
+		u.setSurname(user.getSurname());
 		return u;
 	}
 }

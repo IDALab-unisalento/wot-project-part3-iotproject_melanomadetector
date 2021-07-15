@@ -25,4 +25,9 @@ public class ReadingsServiceImpl implements IReadingsService {
 		return this.readingsRepo.getByUserId(userId);
 	}
 
+	@Override
+	public List<Readings> getByUserCodiceFiscale(String codiceFiscale) {
+		return this.readingsRepo.findByUserCodiceFiscale(codiceFiscale);
+	}
+
 }

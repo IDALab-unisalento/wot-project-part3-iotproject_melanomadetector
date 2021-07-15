@@ -28,4 +28,9 @@ public class UserServiceImpl implements IUserService {
 		return this.userRepo.findById(id).get();
 	}
 
+	@Override
+	public User getByEmailAndPasswordAndType(String email, String password, String type) {
+		return this.userRepo.findByEmailAndPasswordAndType(email, password, type);
+	}
+
 }

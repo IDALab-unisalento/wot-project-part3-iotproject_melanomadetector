@@ -23,7 +23,7 @@ import it.unisalento.melanomaDetector.iservice.IUserService;
 
 @RestController
 @RequestMapping("/readings")
-@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8100", "http://192.168.1.4:8100/" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ReadingsRestController {
 
 	@Autowired
@@ -35,6 +35,21 @@ public class ReadingsRestController {
 	public List<ReadingsDTO> getAll(@PathVariable int id) {
 
 		List<Readings> listReading = readingsService.getByUserId(id);
+
+		List<ReadingsDTO> list = new ArrayList<ReadingsDTO>();
+		for (Readings reading : listReading) {
+			ReadingsDTO u = this.fillDTO(reading);
+			if (u != null)
+				list.add(u);
+		}
+
+		return list;
+	}
+
+	@RequestMapping(value = "/user/search/{codiceFiscale}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<ReadingsDTO> search(@PathVariable String codiceFiscale) {
+
+		List<Readings> listReading = readingsService.getByUserCodiceFiscale(codiceFiscale);
 
 		List<ReadingsDTO> list = new ArrayList<ReadingsDTO>();
 		for (Readings reading : listReading) {
@@ -80,6 +95,7 @@ public class ReadingsRestController {
 		u.setId(user.getId());
 		u.setName(user.getName());
 		u.setPassword(user.getPassword());
+		u.setType(user.getType());
 		u.setSurname(user.getPassword());
 		return u;
 	}

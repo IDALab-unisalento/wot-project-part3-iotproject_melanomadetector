@@ -12,4 +12,6 @@ import it.unisalento.melanomaDetector.domain.Readings;
 public interface ReadingsRepository extends JpaRepository<Readings, Integer> {
 
 	public List<Readings> getByUserId(int id);
+
+	public List<Readings> findByUserCodiceFiscale(String codiceFiscale);
 }

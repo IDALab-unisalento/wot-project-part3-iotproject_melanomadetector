@@ -9,4 +9,6 @@ import it.unisalento.melanomaDetector.domain.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	public User findByEmailAndPassword(String email, String password);
+
+	public User findByEmailAndPasswordAndType(String email, String password, String type);
 }

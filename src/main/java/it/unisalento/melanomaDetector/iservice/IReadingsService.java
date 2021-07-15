@@ -10,4 +10,6 @@ public interface IReadingsService {
 
 	public List<Readings> getByUserId(int userId);
 
+	public List<Readings> getByUserCodiceFiscale(String codiceFiscale);
+
 }

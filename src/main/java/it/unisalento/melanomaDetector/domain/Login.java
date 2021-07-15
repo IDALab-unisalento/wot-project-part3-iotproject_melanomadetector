@@ -4,6 +4,7 @@ public class Login {
 
 	String email;
 	String password;
+	String type;
 
 	public Login() {
 
@@ -14,6 +15,13 @@ public class Login {
 		this.password = password;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getEmail() {
 		return email;
 	}
